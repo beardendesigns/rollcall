@@ -26,7 +26,8 @@ class RollCall
 
         got_something_that_time = true
         hostname,num_cores = data.split
-        server_info.store(hostname, num_cores)
+        info = {cores: num_cores.to_i, role: "test_#{server_info.count}".to_sym}
+        server_info.store(hostname, info)
       end
      break unless got_something_that_time # stop receiving if we haven't seen any data in a while
     end
