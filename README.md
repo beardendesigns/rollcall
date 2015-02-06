@@ -1,9 +1,20 @@
 # rollcall
 Two ruby scripts that can ask anyone that's listening for their hostname and number of cores.
 
-Computers running `server_info.rb` listen on port 33333 for someone to request their stats, then respond on port 33334.
+`ruby server_info_control.rb start`: listen on port 33333 for someone to request their stats, then respond on port 33334. "I am an available server to test on".
 
-Computers that run `rollcall.rb` listen broadcast to port 33333 to solicit information, then listen for responses for 2 seconds on port 33334.
+`ruby server_info_control.rb stop`: stop listening/responding. "..."
+
+```ruby
+require 'rollcall'
+test_server_info = Rollcall.call_roll
+```
+
+Broadcast to port 33333 to solicit information, then listen for responses for 2 seconds on port 33334.
+```ruby
+p test_server_info
+=> { "new-test-machine-<uuid>.local" => {cores: 8, role: :test_0}, "new-test-machine-<other-uuid>.local" => {cores: 16, role: :test_1}}
+```
 
 Based on super handy code examples on betterlogic.com
 
